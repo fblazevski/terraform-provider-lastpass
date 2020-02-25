@@ -26,6 +26,26 @@ type Secret struct {
 	CustomFields    map[string]string `json:"custom_fields"`
 }
 
+// SSHSecret describes a Lastpass object.
+type SSHSecret struct {
+	Fullname        string            `json:"fullname"`
+	Group           string            `json:"group"`
+	ID              string            `json:"id"`
+	LastModifiedGmt string            `json:"last_modified_gmt"`
+	LastTouch       string            `json:"last_touch"`
+	Name            string            `json:"name"`
+	Note            string            `json:"note"`
+	Share           string            `json:"share"`
+	PrivateKey      string            `json:"private_key"`
+	PublicKey       string            `json:"public_key"`
+	Date            string            `json:"date"`
+	Hostname        string            `json:"hostname"`
+	Passphrase      string            `json:"passphrase"`
+	Format          string            `json:"format"`
+	BitStrength     string            `json:"bit_strength"`
+	CustomFields    map[string]string `json:"custom_fields"`
+}
+
 // Client is our Lastpass (lpass) wrapper client.
 type Client struct {
 	Username string
@@ -63,6 +83,17 @@ Password: %s
 Notes:    # Add notes below this line.
 %s
 `, s.Name, s.URL, s.Username, s.Password, s.Note)
+	return template
+}
+
+func (s *SSHSecret) getSSHTemplate() string {
+	template := fmt.Sprintf(`Name: %s
+Private Key: %s
+Public Key: %s 
+Passphrase: %s
+Notes:    # Add notes below this line.
+%s
+`, s.Name, s.PrivateKey, s.PublicKey, s.Passphrase, s.Note)
 	return template
 }
 
