@@ -15,7 +15,8 @@ type config struct {
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		ResourcesMap: map[string]*schema.Resource{
-			"lastpass_secret": ResourceSecret(),
+			"lastpass_secret":  ResourceSecret(),
+			"lastpass_ssh_key": ResourceSSHSecret(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"lastpass_secret": DataSourceSecret(),
