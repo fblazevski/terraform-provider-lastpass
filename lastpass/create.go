@@ -76,7 +76,7 @@ func (c *Client) CreateSSH(s SSHSecret) (SSHSecret, error) {
 		return s, err
 	}
 	template := s.getSSHTemplate()
-	cmd := exec.Command("lpass", "add", s.Name, "--non-interactive", "--sync=now")
+	cmd := exec.Command("lpass", "add", s.Name, "--non-interactive", "--sync=now", "--note-type=ssh-key")
 	var inbuf, errbuf bytes.Buffer
 	inbuf.Write([]byte(template))
 	cmd.Stdin = &inbuf
